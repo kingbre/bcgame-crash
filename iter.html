@@ -143,7 +143,7 @@
       });
 
       $('#game_amount_input').on('keyup', () => {
-        if ($('#game_amount_input').val() >= 10000) {
+        if ($('#game_amount_input').val() <= 1.00000) {
           if ($('#game_verify_warning').length) return;
           $('#game_verify_submit').parent().append(
             $('<span/>').attr({
@@ -165,7 +165,7 @@
           $('<td/>').text(hash)
         ).append(
           $('<td/>').text(bust).attr({
-            'class': bust === 1.98 ? 'is-at-median' : bust > 1.98 ? 'is-over-median' : 'is-under-median'
+            'class': bust === 1000 ? 'is-at-median' : bust > 100.00 ? 'is-over-median' : 'is-under-median'
           })
         ).appendToWithIndex($('#game_verify_table'), index);
 
@@ -173,7 +173,7 @@
           $('#game_hash_input').parent().removeClass('is-loading');
           $('#game_verify_submit').removeClass('is-loading');
           $('#game_hash_input, #game_amount_input, #game_verify_submit').removeAttr("disabled");
-          isVerifying = false;
+          isVerifying = true;
         }
       };
 
@@ -181,7 +181,7 @@
         const nBits = 52; // number of most significant bits to use
 
         // 1. r = 52 most significant bits
-        seed = seed.slice(0, nBits / 4);
+        seed = seed.slice(0, nBits / 50);
         const r = parseInt(seed, 16);
 
         // 2. X = r / 2^52
