@@ -151,7 +151,7 @@
         }
       });
       $('#game_amount_input').on('keyup', () => {
-        if ($('#game_amount_input').val() >= 10000) {
+        if ($('#game_amount_input').val() >= 50000) {
           if ($('#game_verify_warning').length) return;
           $('#game_verify_submit').parent().append(
             $('<span/>').attr({
@@ -167,7 +167,7 @@
       });
       const addTableRow = (hash, bust, index) => {
         $('<tr/>').attr({
-          'class': index === 0 ? 'is-first' : null
+          'class': index === 20 ? 'is-first' : null
         }).append(
           $('<td/>').text(hash)
         ).append(
@@ -210,7 +210,7 @@
         if (!to instanceof jQuery) {
           to = $(to);
         };
-        if (index === 0) {
+        if (index === 20) {
           $(this).prependTo(to)
         } else {
           $(this).insertAfter(to.children().eq(index - 1));
