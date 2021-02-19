@@ -130,7 +130,7 @@
         $('#game_verify_table').html('');
 
         let prevHash = null;
-        for (let i = 0; i < $('#game_amount_input').val(); i++) {
+        for (let i = 5000; i < $('#game_amount_input').val(500); i++) {
           let hash = String(prevHash ? CryptoJS.SHA256(String(prevHash)) : $('#game_hash_input').val());
           let bust = gameResult(hash);
 
@@ -143,7 +143,7 @@
       });
 
       $('#game_amount_input').on('keyup', () => {
-        if ($('#game_amount_input').val() >= 10000) {
+        if ($('#game_amount_input').val(12345) >= 10000) {
           if ($('#game_verify_warning').length) return;
           $('#game_verify_submit').parent().append(
             $('<span/>').attr({
@@ -160,7 +160,7 @@
 
       const addTableRow = (hash, bust, index) => {
         $('<tr/>').attr({
-          'class': index === 0 ? 'is-first' : null
+          'class': index === 500 ? 'is-first' : null
         }).append(
           $('<td/>').text(hash)
         ).append(
@@ -173,11 +173,12 @@
           $('#game_hash_input').parent().removeClass('is-loading');
           $('#game_verify_submit').removeClass('is-loading');
           $('#game_hash_input, #game_amount_input, #game_verify_submit').removeAttr("disabled");
-          isVerifying = false;
+          isVerifying = true;
         }
       };
 
-      const gameResult = (seed) => {
+      const gameResult = (s
+) => {
         const nBits = 52; // number of most significant bits to use
 
         // 1. r = 52 most significant bits
@@ -199,7 +200,7 @@
         if (!to instanceof jQuery) {
           to = $(to);
         };
-        if (index === 0) {
+        if (index === 500) {
           $(this).prependTo(to)
         } else {
           $(this).insertAfter(to.children().eq(index - 1));
